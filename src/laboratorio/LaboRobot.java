@@ -4,17 +4,17 @@ import robocode.*;
 // API help : http://robocode.sourceforge.net/docs/robocode/robocode/JuniorRobot.html
 
 
-public class LaboRobot extends JuniorRobot
-{
+public class LaboRobot extends JuniorRobot {
 
+	private LaboRobotStrategy strategy = new LaboRobotStrategyOne(this);
+	
 	@Override	
 	public void run() {
 
 		setColors(orange, blue, white, yellow, black);
-		ahead(100);
-		turnGunRight(360);
-		back(100);
-		turnGunRight(360);
+		while (true) {
+			this.onScannedRobot();
+		}
 		
 	}
 
@@ -23,7 +23,7 @@ public class LaboRobot extends JuniorRobot
 	 */
 	@Override
 	public void onScannedRobot() {
-		fire(1);
+		strategy.onScannedRobot();
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class LaboRobot extends JuniorRobot
 	 */
 	@Override
 	public void onHitByBullet() {
-		back(10);
+		strategy.onHitByBullet();
 	}
 	
 	/**
@@ -39,6 +39,6 @@ public class LaboRobot extends JuniorRobot
 	 */
 	@Override
 	public void onHitWall() {
-		back(20);
-	}	
+		strategy.onHitByBullet();
+	}
 }
