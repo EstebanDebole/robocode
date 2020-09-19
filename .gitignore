@@ -2,3 +2,5 @@ config/
 robots/
 bin/
 .settings/
+.vscode/
+.project
