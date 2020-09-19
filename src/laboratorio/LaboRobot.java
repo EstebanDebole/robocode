@@ -3,42 +3,41 @@ import robocode.*;
 
 // API help : http://robocode.sourceforge.net/docs/robocode/robocode/JuniorRobot.html
 
-
 public class LaboRobot extends JuniorRobot {
 
-	private LaboRobotStrategy strategy = new LaboRobotStrategyOne(this);
+	private LaboRobotStrategy strategy; 
 	
 	@Override	
 	public void run() {
-
-		setColors(orange, blue, white, yellow, black);
+		strategy = new LaboRobotStrategyTwo(this); //Set the initial strategy
+		boolean strategyChange = false;
+		setColors(red,black,black);
 		while (true) {
-			this.onScannedRobot();
+			strategy.runStrategy();
+			if ((!strategyChange) && (this.others == 1)) {
+				strategy = new LaboRobotStrategyOne(this);
+				strategyChange = true;
+			}
 		}
-		
 	}
 
-	/**
-	 * onScannedRobot: What to do when you see another robot
-	 */
+	//when the radar detects another robot. 
+	//When this event occurs the scannedDistance, scannedAngle, scannedBearing, and scannedEnergy 
+	//field values are automatically updated.
 	@Override
 	public void onScannedRobot() {
 		strategy.onScannedRobot();
 	}
 
-	/**
-	 * onHitByBullet: What to do when you're hit by a bullet
-	 */
+	//onHitByBullet: What to do when you're hit by a bullet
 	@Override
 	public void onHitByBullet() {
 		strategy.onHitByBullet();
 	}
 	
-	/**
-	 * onHitWall: What to do when you hit a wall
-	 */
+	//onHitWall: What to do when you hit a wall
 	@Override
 	public void onHitWall() {
-		strategy.onHitByBullet();
+		strategy.onHitWall();
 	}
 }
