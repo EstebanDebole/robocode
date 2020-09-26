@@ -2,11 +2,18 @@ package laboratorio;
 
 public class LaboRobotStrategyTwo implements LaboRobotStrategy {
 
-	private LaboRobot robot;
+	private static LaboRobotStrategyTwo instance;
+	private LaboRobotGrupo23 robot;
 	private boolean isFirstTime = true;
 
-	public LaboRobotStrategyTwo(LaboRobot robot) {
+	private LaboRobotStrategyTwo(LaboRobotGrupo23 robot) {
 		this.robot = robot;
+	}
+
+	public static LaboRobotStrategyTwo getInstance(LaboRobotGrupo23 robot) {
+		if (instance == null)
+			instance = new LaboRobotStrategyTwo(robot);
+		return instance;
 	}
 
 	@Override
