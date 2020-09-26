@@ -1,6 +1,6 @@
 package laboratorio;
 
-public interface LaboRobotStrategy {
+interface LaboRobotStrategy {
 
 	void runStrategy();
 

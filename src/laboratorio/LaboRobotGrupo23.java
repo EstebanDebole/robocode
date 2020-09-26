@@ -4,19 +4,19 @@ import robocode.*;
 
 // API help : http://robocode.sourceforge.net/docs/robocode/robocode/JuniorRobot.html
 
-public class LaboRobot extends JuniorRobot {
+public class LaboRobotGrupo23 extends JuniorRobot {
 
 	private LaboRobotStrategy strategy;
 
 	@Override
 	public void run() {
-		strategy = new LaboRobotStrategyTwo(this); // Set the initial strategy
+		strategy = LaboRobotStrategyTwo.getInstance(this); // Set the initial strategy
 		boolean strategyChanged = false;
 		setColors(red, black, black);
 		while (true) {
 			strategy.runStrategy();
 			if ((!strategyChanged) && (this.others == 1)) {
-				strategy = new LaboRobotStrategyOne(this);
+				strategy = LaboRobotStrategyOne.getInstance(this);
 				strategyChanged = true;
 			}
 		}
